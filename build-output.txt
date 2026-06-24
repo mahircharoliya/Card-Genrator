@@ -1,0 +1,84 @@
+﻿node.exe :  ΓÜá Invalid next.config.ts options 
+detected: 
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ( ΓÜá In 
+   valid ne...ions detected: :String) [], RemoteExc  
+  eption
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+ ΓÜá     Unrecognized key(s) in object: 
+'serverComponentsExternalPackages' at "experimental"
+ ΓÜá See more info here: 
+https://nextjs.org/docs/messages/invalid-next-config
+ ΓÜá `experimental.serverComponentsExternalPackages` 
+has been moved to `serverExternalPackages`. Please 
+update your next.config.ts file accordingly.
+  Γû▓ Next.js 15.0.0
+  - Environments: .env
+
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully
+   Linting and checking validity of types ...
+ Γ¿» ESLint must be installed in order to run during 
+builds: npm install --save-dev eslint
+   Collecting page data ...
+   Generating static pages (0/16) ...
+ Γ¿» useSearchParams() should be wrapped in a 
+suspense boundary at page "/gallery". Read more: http
+s://nextjs.org/docs/messages/missing-suspense-with-cs
+r-bailout
+    at o (D:\Codage-Habitation\festival-card-generato
+r\.next\server\chunks\834.js:1:4561)
+    at f (D:\Codage-Habitation\festival-card-generato
+r\.next\server\chunks\834.js:1:17970)
+    at g (D:\Codage-Habitation\festival-card-generato
+r\.next\server\app\gallery\page.js:1:2833)
+    at nj (D:\Codage-Habitation\festival-card-generat
+or\node_modules\next\dist\compiled\next-server\app-pa
+ge.runtime.prod.js:20:45788)
+    at nO (D:\Codage-Habitation\festival-card-generat
+or\node_modules\next\dist\compiled\next-server\app-pa
+ge.runtime.prod.js:20:47563)
+    at nN (D:\Codage-Habitation\festival-card-generat
+or\node_modules\next\dist\compiled\next-server\app-pa
+ge.runtime.prod.js:20:65362)
+    at nM (D:\Codage-Habitation\festival-card-generat
+or\node_modules\next\dist\compiled\next-server\app-pa
+ge.runtime.prod.js:20:62993)
+    at n$ (D:\Codage-Habitation\festival-card-generat
+or\node_modules\next\dist\compiled\next-server\app-pa
+ge.runtime.prod.js:20:46140)
+    at nO (D:\Codage-Habitation\festival-card-generat
+or\node_modules\next\dist\compiled\next-server\app-pa
+ge.runtime.prod.js:20:47609)
+    at nO (D:\Codage-Habitation\festival-card-generat
+or\node_modules\next\dist\compiled\next-server\app-pa
+ge.runtime.prod.js:20:62344)
+
+Error occurred prerendering page "/gallery". Read 
+more: 
+https://nextjs.org/docs/messages/prerender-error
+
+Failed to build /gallery/page: /gallery after 1 attempts.
+   Generating static pages (4/16) 
+   Generating static pages (8/16) 
+
+> Build error occurred
+Error: Export encountered an error on /gallery/page: 
+/gallery, exiting the build.
+    at exportPageWithRetry (D:\Codage-Habitation\fest
+ival-card-generator\node_modules\next\dist\export\wor
+ker.js:289:31)
+    at async Promise.all (index 6)
+    at async D:\Codage-Habitation\festival-card-gener
+ator\node_modules\next\dist\export\worker.js:319:35
+    at async Object.exportPages (D:\Codage-Habitation
+\festival-card-generator\node_modules\next\dist\expor
+t\worker.js:314:5) {
+  type: 'ExportPageError',
+  code: 'NEXT_EXPORT_PAGE_ERROR'
+}

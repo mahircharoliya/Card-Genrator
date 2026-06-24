@@ -1,0 +1,125 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String            @id @default(cuid())
+  email           String            @unique
+  password        String
+  name            String
+  role            Role              @default(USER)
+  status          UserStatus        @default(ACTIVE)
+  profileImage    String?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  businessProfile BusinessProfile?
+  downloads       DownloadHistory[]
+}
+
+model FestivalCategory {
+  id           String          @id @default(cuid())
+  name         String
+  slug         String          @unique
+  description  String?
+  icon         String?
+  coverImage   String?
+  isVisible    Boolean         @default(true)
+  order        Int             @default(0)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  cards        FestivalCard[]
+}
+
+model FestivalCard {
+  id                   String            @id @default(cuid())
+  title                String
+  categoryId           String
+  category             FestivalCategory  @relation(fields: [categoryId], references: [id])
+  thumbnail            String
+  highResImage         String
+  primaryColor         String            @default("#FF6B35")
+  secondaryColor       String            @default("#FFFFFF")
+  status               CardStatus        @default(DRAFT)
+  downloadCount        Int               @default(0)
+  viewCount            Int               @default(0)
+  isTrending           Boolean           @default(false)
+  isFeatured           Boolean           @default(false)
+  tags                 String[]
+  logoX                Float             @default(50)
+  logoY                Float             @default(50)
+  logoWidth            Float             @default(150)
+  logoHeight           Float             @default(150)
+  businessNameX        Float             @default(50)
+  businessNameY        Float             @default(200)
+  businessNameFontSize Int               @default(24)
+  businessNameColor    String            @default("#FFFFFF")
+  phoneX               Float             @default(50)
+  phoneY               Float             @default(240)
+  phoneColor           String            @default("#FFFFFF")
+  emailX               Float             @default(50)
+  emailY               Float             @default(270)
+  emailColor           String            @default("#FFFFFF")
+  websiteX             Float             @default(50)
+  websiteY             Float             @default(300)
+  websiteColor         String            @default("#FFFFFF")
+  addressX             Float             @default(50)
+  addressY             Float             @default(330)
+  addressColor         String            @default("#FFFFFF")
+  taglineX             Float             @default(50)
+  taglineY             Float             @default(360)
+  taglineColor         String            @default("#FFFFFF")
+  fontFamily           String            @default("Inter")
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
+  downloads            DownloadHistory[]
+}
+
+model BusinessProfile {
+  id           String   @id @default(cuid())
+  userId       String   @unique
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  businessName String?
+  ownerName    String?
+  phone        String?
+  email        String?
+  website      String?
+  address      String?
+  instagram    String?
+  facebook     String?
+  whatsapp     String?
+  tagline      String?
+  gstNumber    String?
+  logo         String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model DownloadHistory {
+  id        String       @id @default(cuid())
+  userId    String
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cardId    String
+  card      FestivalCard @relation(fields: [cardId], references: [id])
+  format    String       @default("PNG")
+  createdAt DateTime     @default(now())
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+}
+
+enum CardStatus {
+  DRAFT
+  PUBLISHED
+}
