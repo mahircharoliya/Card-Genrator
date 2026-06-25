@@ -279,4 +279,12 @@ export const resolvers = {
       });
     },
   },
+  FestivalCard: {
+    festivalDate: (parent: any) => {
+      if (parent.festivalDate instanceof Date) {
+        return parent.festivalDate.toISOString();
+      }
+      return parent.festivalDate || "";
+    },
+  },
 };

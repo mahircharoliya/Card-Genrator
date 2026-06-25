@@ -26,7 +26,11 @@ const CATEGORIES = [
 ];
 
 function slugify(text: string): string {
-  return text.toLowerCase().replace(/[^\w\s-]/g, "").replace(/[\s_-]+/g, "-").replace(/^-+|-+$/g, "");
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 async function main() {
@@ -93,77 +97,141 @@ async function main() {
   console.log(`✅ ${CATEGORIES.length} categories created`);
 
   // Create sample festival cards
-  const diwaliCat = await prisma.festivalCategory.findUnique({ where: { slug: "diwali" } });
-  const newYearCat = await prisma.festivalCategory.findUnique({ where: { slug: "new-year" } });
-  const christmasCat = await prisma.festivalCategory.findUnique({ where: { slug: "christmas" } });
+  const diwaliCat = await prisma.festivalCategory.findUnique({
+    where: { slug: "diwali" },
+  });
+  const newYearCat = await prisma.festivalCategory.findUnique({
+    where: { slug: "new-year" },
+  });
+  const christmasCat = await prisma.festivalCategory.findUnique({
+    where: { slug: "christmas" },
+  });
 
-  const sampleCards = [
-    {
-      title: "Diwali Gold Elegance",
-      categoryId: diwaliCat!.id,
-      thumbnail: "https://images.unsplash.com/photo-1604514628550-37477afdf4e3?w=400&h=400&fit=crop",
-      highResImage: "https://images.unsplash.com/photo-1604514628550-37477afdf4e3?w=1200&h=1200&fit=crop",
-      primaryColor: "#D97706",
-      secondaryColor: "#FEF3C7",
-      status: "PUBLISHED" as const,
-      isTrending: true,
-      isFeatured: true,
-      tags: ["diwali", "gold", "elegant", "festival"],
-      logoX: 300, logoY: 80, logoWidth: 120, logoHeight: 120,
-      businessNameX: 40, businessNameY: 230, businessNameFontSize: 28,
-      businessNameColor: "#92400E",
-      phoneX: 40, phoneY: 275, phoneColor: "#78350F",
-      emailX: 40, emailY: 305, emailColor: "#78350F",
-      websiteX: 40, websiteY: 335, websiteColor: "#78350F",
-      addressX: 40, addressY: 365, addressColor: "#92400E",
-      taglineX: 40, taglineY: 200, taglineColor: "#D97706",
-      downloadCount: 234,
-    },
-    {
-      title: "Happy New Year Sparkle",
-      categoryId: newYearCat!.id,
-      thumbnail: "https://images.unsplash.com/photo-1467810563316-b5476525c0f9?w=400&h=400&fit=crop",
-      highResImage: "https://images.unsplash.com/photo-1467810563316-b5476525c0f9?w=1200&h=1200&fit=crop",
-      primaryColor: "#1E40AF",
-      secondaryColor: "#DBEAFE",
-      status: "PUBLISHED" as const,
-      isTrending: true,
-      tags: ["new year", "celebration", "fireworks"],
-      logoX: 280, logoY: 60, logoWidth: 130, logoHeight: 130,
-      businessNameX: 40, businessNameY: 240, businessNameFontSize: 26,
-      businessNameColor: "#FFFFFF",
-      phoneX: 40, phoneY: 285, phoneColor: "#BFDBFE",
-      emailX: 40, emailY: 315, emailColor: "#BFDBFE",
-      websiteX: 40, websiteY: 345, websiteColor: "#BFDBFE",
-      addressX: 40, addressY: 375, addressColor: "#DBEAFE",
-      taglineX: 40, taglineY: 210, taglineColor: "#93C5FD",
-      downloadCount: 189,
-    },
-    {
-      title: "Merry Christmas Joy",
-      categoryId: christmasCat!.id,
-      thumbnail: "https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=400&h=400&fit=crop",
-      highResImage: "https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=1200&h=1200&fit=crop",
-      primaryColor: "#166534",
-      secondaryColor: "#DCFCE7",
-      status: "PUBLISHED" as const,
-      isFeatured: true,
-      tags: ["christmas", "joy", "holiday", "celebration"],
-      logoX: 290, logoY: 70, logoWidth: 120, logoHeight: 120,
-      businessNameX: 40, businessNameY: 235, businessNameFontSize: 24,
-      businessNameColor: "#FFFFFF",
-      phoneX: 40, phoneY: 275, phoneColor: "#BBF7D0",
-      emailX: 40, emailY: 305, emailColor: "#BBF7D0",
-      websiteX: 40, websiteY: 335, websiteColor: "#BBF7D0",
-      addressX: 40, addressY: 365, addressColor: "#DCFCE7",
-      taglineX: 40, taglineY: 205, taglineColor: "#86EFAC",
-      downloadCount: 156,
-    },
-  ];
+const sampleCards = [
+  {
+    title: "Diwali Gold Elegance",
+    categoryId: diwaliCat!.id,
+    festivalDate: new Date("2026-11-08"),
+    thumbnail:
+      "https://images.unsplash.com/photo-1604514628550-37477afdf4e3?w=400&h=400&fit=crop",
+    highResImage:
+      "https://images.unsplash.com/photo-1604514628550-37477afdf4e3?w=1200&h=1200&fit=crop",
+    primaryColor: "#D97706",
+    secondaryColor: "#FEF3C7",
+    status: "PUBLISHED" as const,
+    isTrending: true,
+    isFeatured: true,
+    tags: ["diwali", "gold", "elegant", "festival"],
+    logoX: 300,
+    logoY: 80,
+    logoWidth: 120,
+    logoHeight: 120,
+    businessNameX: 40,
+    businessNameY: 230,
+    businessNameFontSize: 28,
+    businessNameColor: "#92400E",
+    phoneX: 40,
+    phoneY: 275,
+    phoneColor: "#78350F",
+    emailX: 40,
+    emailY: 305,
+    emailColor: "#78350F",
+    websiteX: 40,
+    websiteY: 335,
+    websiteColor: "#78350F",
+    addressX: 40,
+    addressY: 365,
+    addressColor: "#92400E",
+    taglineX: 40,
+    taglineY: 200,
+    taglineColor: "#D97706",
+    downloadCount: 234,
+  },
+
+  {
+    title: "Happy New Year Sparkle",
+    categoryId: newYearCat!.id,
+    festivalDate: new Date("2027-01-01"),
+    thumbnail:
+      "https://images.unsplash.com/photo-1467810563316-b5476525c0f9?w=400&h=400&fit=crop",
+    highResImage:
+      "https://images.unsplash.com/photo-1467810563316-b5476525c0f9?w=1200&h=1200&fit=crop",
+    primaryColor: "#1E40AF",
+    secondaryColor: "#DBEAFE",
+    status: "PUBLISHED" as const,
+    isTrending: true,
+    tags: ["new year", "celebration", "fireworks"],
+    logoX: 280,
+    logoY: 60,
+    logoWidth: 130,
+    logoHeight: 130,
+    businessNameX: 40,
+    businessNameY: 240,
+    businessNameFontSize: 26,
+    businessNameColor: "#FFFFFF",
+    phoneX: 40,
+    phoneY: 285,
+    phoneColor: "#BFDBFE",
+    emailX: 40,
+    emailY: 315,
+    emailColor: "#BFDBFE",
+    websiteX: 40,
+    websiteY: 345,
+    websiteColor: "#BFDBFE",
+    addressX: 40,
+    addressY: 375,
+    addressColor: "#DBEAFE",
+    taglineX: 40,
+    taglineY: 210,
+    taglineColor: "#93C5FD",
+    downloadCount: 189,
+  },
+
+  {
+    title: "Merry Christmas Joy",
+    categoryId: christmasCat!.id,
+    festivalDate: new Date("2026-12-25"),
+    thumbnail:
+      "https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=400&h=400&fit=crop",
+    highResImage:
+      "https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=1200&h=1200&fit=crop",
+    primaryColor: "#166534",
+    secondaryColor: "#DCFCE7",
+    status: "PUBLISHED" as const,
+    isFeatured: true,
+    tags: ["christmas", "joy", "holiday", "celebration"],
+    logoX: 290,
+    logoY: 70,
+    logoWidth: 120,
+    logoHeight: 120,
+    businessNameX: 40,
+    businessNameY: 235,
+    businessNameFontSize: 24,
+    businessNameColor: "#FFFFFF",
+    phoneX: 40,
+    phoneY: 275,
+    phoneColor: "#BBF7D0",
+    emailX: 40,
+    emailY: 305,
+    emailColor: "#BBF7D0",
+    websiteX: 40,
+    websiteY: 335,
+    websiteColor: "#BBF7D0",
+    addressX: 40,
+    addressY: 365,
+    addressColor: "#DCFCE7",
+    taglineX: 40,
+    taglineY: 205,
+    taglineColor: "#86EFAC",
+    downloadCount: 156,
+  },
+];
 
   for (const card of sampleCards) {
-    await prisma.festivalCard.create({ data: card });
-  }
+  await prisma.festivalCard.create({
+    data: card,
+  });
+}
   console.log(`✅ ${sampleCards.length} sample cards created`);
 
   console.log("\n🎉 Seeding complete!");
@@ -172,5 +240,10 @@ async function main() {
 }
 
 main()
-  .catch((e) => { console.error(e); process.exit(1); })
-  .finally(async () => { await prisma.$disconnect(); });
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

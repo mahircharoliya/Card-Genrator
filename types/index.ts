@@ -26,6 +26,7 @@ export interface FestivalCategory {
 export interface FestivalCard {
   id: string;
   title: string;
+   festivalDate: string;
   categoryId: string;
   category?: FestivalCategory;
   thumbnail: string;

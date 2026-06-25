@@ -33,6 +33,7 @@ export const typeDefs = `#graphql
   type FestivalCard {
     id: ID!
     title: String!
+    festivalDate: String!
     categoryId: String!
     category: FestivalCategory
     thumbnail: String!
@@ -134,6 +135,7 @@ export const typeDefs = `#graphql
 
   input FestivalCardInput {
     title: String!
+    festivalDate: String
     categoryId: String!
     thumbnail: String!
     highResImage: String!

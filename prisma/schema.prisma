@@ -38,6 +38,7 @@ model FestivalCategory {
 model FestivalCard {
   id                   String            @id @default(cuid())
   title                String
+  festivalDate         DateTime          @default(now())
   categoryId           String
   category             FestivalCategory  @relation(fields: [categoryId], references: [id])
   thumbnail            String

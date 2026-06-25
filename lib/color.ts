@@ -115,10 +115,7 @@ export function hslToRgb(h: number, s: number, l: number): { r: number; g: numbe
     };
 }
 
-/**
- * Parse color string and return rgb string
- * Supports: hex, rgb, rgba, oklch, lab, lch, hsl, hsla, and named colors
- */
+
 export function parseColorToRgb(color: string): string {
     if (!color) return "rgb(0, 0, 0)";
 
@@ -183,20 +180,12 @@ export function parseColorToRgb(color: string): string {
     return color;
 }
 
-/**
- * Convert a CSS color string to rgb format compatible with html2canvas
- */
 export function normalizeColorForCanvas(color: string): string {
     if (!color) return "rgb(0, 0, 0)";
     return parseColorToRgb(color);
 }
 
-/**
- * Recursively normalize all CSS colors in an element to rgb format
- * This prevents html2canvas from encountering unsupported color formats like lab, oklch, lch
- */
 export function normalizeCanvasColors(element: HTMLElement): void {
-    // Normalize inline styles
     if (element.style) {
         const propsToNormalize = ["background", "backgroundColor", "color", "borderColor", "borderTopColor", "borderRightColor", "borderBottomColor", "borderLeftColor", "outlineColor", "textDecorationColor", "fill", "stroke"];
 
@@ -208,7 +197,6 @@ export function normalizeCanvasColors(element: HTMLElement): void {
             }
         });
 
-        // Normalize background-image gradients
         const bgImage = element.style.getPropertyValue("background-image");
         if (bgImage) {
             const normalizedBg = normalizeGradient(bgImage);
@@ -216,7 +204,6 @@ export function normalizeCanvasColors(element: HTMLElement): void {
         }
     }
 
-    // Recursively process children
     for (const child of element.children) {
         if (child instanceof HTMLElement) {
             normalizeCanvasColors(child as HTMLElement);
@@ -224,31 +211,24 @@ export function normalizeCanvasColors(element: HTMLElement): void {
     }
 }
 
-/**
- * Normalize CSS gradient functions to rgb format
- */
 function normalizeGradient(gradient: string): string {
     if (!gradient) return gradient;
 
-    // Normalize lab colors in gradients
     gradient = gradient.replace(/lab\(\s*([\d.]+)\s+([\d.-]+)\s+([\d.-]+)(?:\s+\/\s*[\d.]+)?\)/g, (_, l, a, b) => {
         const rgb = labToRgb(parseFloat(l), parseFloat(a), parseFloat(b));
         return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
     });
 
-    // Normalize lch colors in gradients
     gradient = gradient.replace(/lch\(\s*([\d.]+)\s+([\d.]+)\s+([\d.]+)(?:\s+\/\s*[\d.]+)?\)/g, (_, l, c, h) => {
         const rgb = lchToRgb(parseFloat(l), parseFloat(c), parseFloat(h));
         return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
     });
 
-    // Normalize oklch colors in gradients
     gradient = gradient.replace(/oklch\(\s*([\d.]+)\s+([\d.]+)\s+([\d.]+)(?:\s+\/\s*[\d.]+)?\)/g, (_, l, c, h) => {
         const rgb = oklchToRgb(parseFloat(l), parseFloat(c), parseFloat(h));
         return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
     });
 
-    // Normalize hsl colors in gradients
     gradient = gradient.replace(/hsla?\(\s*([\d.]+)\s+([\d.]+)%\s+([\d.]+)%(?:\s+\/\s*[\d.]+)?\)/g, (_, h, s, l) => {
         const rgb = hslToRgb(parseFloat(h), parseFloat(s), parseFloat(l));
         return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;

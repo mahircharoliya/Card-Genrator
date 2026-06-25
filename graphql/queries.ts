@@ -81,6 +81,7 @@ export const FESTIVAL_CARDS_QUERY = gql`
     festivalCards(categoryId: $categoryId, status: $status, search: $search, filter: $filter, page: $page, limit: $limit) {
       id
       title
+      festivalDate
       thumbnail
       highResImage
       primaryColor
@@ -106,6 +107,7 @@ export const FESTIVAL_CARD_QUERY = gql`
     festivalCard(id: $id) {
       id
       title
+      festivalDate
       thumbnail
       highResImage
       primaryColor

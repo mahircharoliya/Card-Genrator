@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, Suspense } from "react";
 import { useQuery } from "@apollo/client";
 import { useSearchParams } from "next/navigation";
 import { FESTIVAL_CARDS_QUERY, CATEGORIES_QUERY } from "@/graphql/queries";
@@ -21,7 +21,7 @@ const FILTERS = [
   { value: "featured", label: "✨ Featured" },
 ];
 
-export default function GalleryPage() {
+function GalleryContent() {
   const searchParams = useSearchParams();
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get("category") || "");
@@ -157,5 +157,17 @@ export default function GalleryPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function GalleryPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="h-10 w-10 rounded-full border-4 border-violet-600 border-t-transparent animate-spin" />
+      </div>
+    }>
+      <GalleryContent />
+    </Suspense>
   );
 }

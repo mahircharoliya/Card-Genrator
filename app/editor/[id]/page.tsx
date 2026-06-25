@@ -271,7 +271,7 @@ export default function EditorPage({ params }: EditorPageProps) {
                       width: card.logoWidth,
                       height: card.logoHeight,
                     }}
-                  >
+                   >
                     <div className="relative h-full w-full">
                       <Image
                         src={logoPreview}
