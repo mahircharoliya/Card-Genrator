@@ -21,7 +21,7 @@ export interface FestivalCategory {
   createdAt: string;
   cards?: FestivalCard[];
   cardCount?: number;
-}
+} 
 
 export interface FestivalCard {
   id: string;

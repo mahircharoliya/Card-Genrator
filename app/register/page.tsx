@@ -105,7 +105,7 @@ export default function RegisterPage() {
               Create Account
             </Button>
           </form>
-
+ 
           <p className="mt-6 text-center text-sm text-gray-500">
             Already have an account?{" "}
             <Link href="/login" className="font-semibold text-violet-600 hover:text-violet-700">

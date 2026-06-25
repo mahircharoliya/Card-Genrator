@@ -90,7 +90,7 @@ export const FESTIVAL_CARDS_QUERY = gql`
       downloadCount
       viewCount
       isTrending
-      isFeatured
+      isFeatured 
       tags
       createdAt
       category {
